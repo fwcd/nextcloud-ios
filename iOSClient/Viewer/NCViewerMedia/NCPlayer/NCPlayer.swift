@@ -245,13 +245,13 @@ extension NCPlayer: VLCMediaPlayerDelegate {
         switch player.state {
         case .stopped:
             playerToolBar?.playButtonPlay()
-            print("Played mode: STOPPED")
+            print("[NCPlayer] Played mode: STOPPED")
             break
         case .opening:
-            print("Played mode: OPENING")
+            print("[NCPlayer] Played mode: OPENING")
             break
         case .buffering:
-            print("Played mode: BUFFERING")
+            print("[NCPlayer] Played mode: BUFFERING")
             break
         case .ended:
             NCManageDatabase.shared.addVideo(metadata: self.metadata, position: 0)
@@ -261,10 +261,10 @@ extension NCPlayer: VLCMediaPlayerDelegate {
                 }
             }
             playerToolBar?.playButtonPlay()
-            print("Played mode: ENDED")
+            print("[NCPlayer] Played mode: ENDED")
             break
         case .error:
-            print("Played mode: ERROR")
+            print("[NCPlayer] Played mode: ERROR")
             break
         case .playing:
             guard let playerToolBar = playerToolBar else { return }
@@ -295,17 +295,18 @@ extension NCPlayer: VLCMediaPlayerDelegate {
             self.height = Int(size.height)
             playerToolBar.updateTopToolBar(videoSubTitlesIndexes: player.videoSubTitlesIndexes, audioTrackIndexes: player.audioTrackIndexes)
             NCManageDatabase.shared.addVideo(metadata: metadata, width: self.width, height: self.height, length: self.length)
-            print("Played mode: PLAYING")
+            print("[NCPlayer] Played mode: PLAYING")
             break
         case .paused:
             playerToolBar?.playButtonPlay()
-            print("Played mode: PAUSED")
+            print("[NCPlayer] Played mode: PAUSED")
             break
         default: break
         }
     }
 
     func mediaPlayerTimeChanged(_ aNotification: Notification) {
+        print("[NCPlayer] Time changed: \(player.time)")
         activityIndicator.stopAnimating()
         playerToolBar?.update()
     }
