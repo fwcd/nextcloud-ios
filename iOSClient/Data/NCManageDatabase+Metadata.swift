@@ -149,7 +149,7 @@ extension tableMetadata {
     }
 
     var isAudioOrVideo: Bool {
-        return classFile == NKCommon.TypeClassFile.audio.rawValue || classFile == NKCommon.TypeClassFile.video.rawValue
+        return isAudio || isVideo
     }
 
     var isVideo: Bool {
@@ -157,7 +157,7 @@ extension tableMetadata {
     }
 
     var isAudio: Bool {
-        return classFile == NKCommon.TypeClassFile.audio.rawValue
+        return classFile == NKCommon.TypeClassFile.audio.rawValue || fileName.hasSuffix("opus") || fileName.hasSuffix("ogg")
     }
 
     var isImage: Bool {
